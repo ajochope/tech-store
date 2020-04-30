@@ -10,5 +10,5 @@ else
     # Changes
     echo "Commit changes to Github"
     currentTime=$(date +"%T")
-    git add . && git commit -m "new_mods_$currentTime" && git push origin master;
+    git add . && git commit -m "new_mods_$currentTime" && git push -u origin master;
 fi
