@@ -8,7 +8,7 @@ lftp -p $TABLET_PORT -u $TABLET_USER,$TABLET_PASS $TABLET_IP -e "ls; exit"
 #lftp -p $TABLET_PORT -u $TABLET_USER,$TABLET_PASS $TABLET_IP <<EOF
 #ls 
 #EOF
-#)
+)
 if [ "$checkfolder" == "" ]; then
     echo "No files to delete"
 else
