@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+//import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {ProductProvider} from './context';
 
-//console.log(process.env.REACT_APP_CONTENTFUL_SPACE_ID);
-//console.log(process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ProductProvider>
+    <Router>
+      <App />
+    </Router>
+  </ProductProvider>,
   document.getElementById('root')
 );
 
