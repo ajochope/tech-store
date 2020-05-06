@@ -5,11 +5,12 @@ const ProductContext = React.createContext();
 //Provider
 // Consumer
 class ProductProvider extends Component {
-    state = {
+    state = { 
         sidebarOpen:false,
         cartOpen:false,
         cartItems: 123,
-        links: linkData
+        links: linkData,
+        cart: []
     }
     // Handle Sidebar
     handleSidebar = () => {
