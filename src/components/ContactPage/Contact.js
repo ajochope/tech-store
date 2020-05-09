@@ -8,7 +8,9 @@
             <div className="row">
                 <div className="col-10 mx-auto col-md-6 my-3">
                     <Title title="contact us"></Title>
-                    <form className="mt-5">
+                    <form className="mt-5" 
+                          action="https://formspree.io/ocalles@gmail.com"
+                          method="POST">
                         {/* first */}
                         <div className="form-group">
                             <input type="text" 
@@ -38,9 +40,16 @@
                             <textarea type="text" 
                                     name="message"
                                     className="form-control" 
-                                    placeholder="Texto large text area">
+                                    placeholder="Extra large text area">
                             </textarea>
                         </div>
+                        {/* Submit */}
+                        <div className="form-group mt-3">
+                            <input type="submit" 
+                            className="form-control bg-primary text-white"
+                            value="Send"></input>
+                        </div>
+
                     </form>
                 </div>
             </div>
