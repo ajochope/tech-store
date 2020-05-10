@@ -8,6 +8,7 @@ export default function ContactPage() {
         <>
             <Hero img={contactImg}></Hero>
             <Contact></Contact>
+            
         </>
     )
 }
