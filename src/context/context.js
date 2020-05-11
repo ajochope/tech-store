@@ -9,7 +9,7 @@ class ProductProvider extends Component {
     state = { 
         sidebarOpen:false,
         cartOpen:false,
-        cartItems: 222,
+        cartItems: 333,
         links: linkData,
         socialIcons: socialData,
         cart: []
