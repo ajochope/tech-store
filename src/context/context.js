@@ -14,7 +14,7 @@ class ProductProvider extends Component {
         links: linkData,
         socialIcons: socialData,
         cart:[],
-        cartItems:0,
+        cartItems:11,
         cartSubTotal:0,
         cartTax:0,
         cartTotal:0,
@@ -33,7 +33,8 @@ class ProductProvider extends Component {
     setProducts = (products) => {
         let storeProducts = products.map(item => {
             const {id} = item.sys;
-            const product = {id, ...item.fields};
+            const image = item.fields.image.fields.file.url;
+            const product = {id, ...item.fields, image};
             return product;
         });
         // Featured Products
