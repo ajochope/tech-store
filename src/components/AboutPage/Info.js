@@ -13,7 +13,7 @@ export default function Info() {
                         style={{background: "var(--darkGrey)"}}></img>
                     </div>
                     <div className="col-10 mx-auto col-md-6 my-3">
-                        <Title title="about us"></Title>
+                        <Title title="about us" center></Title>
                         <p className="text-lead text-muted my-3">To get started with React Router in a web app, you’ll need a React web app. If you need to create one, we recommend you try Create React App. </p>
                     </div>
                     <button className="main-link" type="button" style={{marginTop: '2rem'}}>more info</button>
