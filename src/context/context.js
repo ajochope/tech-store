@@ -14,7 +14,7 @@ class ProductProvider extends Component {
         links: linkData,
         socialIcons: socialData,
         cart:[],
-        cartItems:22,
+        cartItems:33,
         cartSubTotal:0,
         cartTax:0,
         cartTotal:0,
