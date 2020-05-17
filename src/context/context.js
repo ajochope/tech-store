@@ -14,7 +14,7 @@ class ProductProvider extends Component {
         links: linkData,
         socialIcons: socialData,
         cart:[],
-        cartItems:33,
+        cartItems:44,
         cartSubTotal:0,
         cartTax:0,
         cartTotal:0,
@@ -72,7 +72,27 @@ class ProductProvider extends Component {
 
     // Add to cart
     addToCart = (id) => {
-        console.log(`Add to cart ${id}`);
+        let tempCart = [...this.state.cart];
+        let tempProducts = [...this.state.storeProducts];
+        let tempItem = tempCart.find(item => item.id === id);
+        if(!tempItem){
+            tempItem = tempProducts.find(item => item.id === id);
+            let total = tempItem.price;
+            let cartItem = {...tempCart, count:1, total};
+            tempCart = [...tempCart,cartItem];
+        } else {
+            tempItem.count++;
+            tempItem.total = tempItem.price * tempItem.count;
+            tempItem.total = parseFloat(tempItem.total.toFixed(2));
+        }
+        this.setState(() => {
+            return { cart: tempCart }
+        }, () => {
+            this.addSTotals();
+            this.syncStorage();
+            this.openCart();
+        });
+
     }
 
     // Set Single Product
@@ -91,12 +111,12 @@ class ProductProvider extends Component {
     }
 
     // Close Cart
-    closeleCart = () => {
+    closeCart = () => {
         this.setState({cartOpen: false}) 
     }
 
     // Open Cart
-    openleCart = () => {
+    openCart = () => {
         this.setState({cartOpen: true}) 
     }
 
