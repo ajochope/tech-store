@@ -14,7 +14,7 @@ class ProductProvider extends Component {
         links: linkData,
         socialIcons: socialData,
         cart:[],
-        cartItems:44,
+        cartItems:66,
         cartSubTotal:0,
         cartTax:0,
         cartTotal:0,
@@ -46,7 +46,7 @@ class ProductProvider extends Component {
             cart: this.getStorageCart(),
             singleProduct: this.getStorageProduct(),
             loading: false
-        });
+        }, () => {this.addTotals()});
     }
 
     // Get Product from storage
@@ -60,10 +60,36 @@ class ProductProvider extends Component {
     }
 
     // Get Totals from storage
-    getSTotals = () => {}
+    getTotals = () => {
+        let subTotal = 0;
+        let cartItems = 0;
+        this.state.cart.forEach(item => {
+            subTotal += item.total;
+            cartItems += item.count;
+        });
+        subTotal = parseFloat(subTotal.toFixed(2));
+        let tax = subTotal *0.2;
+        tax = parseFloat(tax.toFixed(2));
+        let total = subTotal + tax;
+        total = parseFloat(total.toFixed(2));
+        return {
+            cartItems,
+            subTotal,
+            tax,
+            total
+        };
+    }
 
     // Add Totals from storage
-    addSTotals = () => {}
+    addTotals = () => {
+        const totals = this.getTotals();
+        this.setState({
+            cartItems: totals.cartItems,
+            cartSubTotal: totals.subTotal,
+            cartTax: totals.tax,
+            cartTotal: totals.total
+        });
+    }
 
     // Sync Storage
     syncStorage =() => {
@@ -88,7 +114,7 @@ class ProductProvider extends Component {
         this.setState(() => {
             return { cart: tempCart }
         }, () => {
-            this.addSTotals();
+            this.addTotals();
             this.syncStorage();
             this.openCart();
         });
