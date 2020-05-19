@@ -56,7 +56,13 @@ class ProductProvider extends Component {
 
     // Get Cart from storage
     getStorageCart = () => {
-        return [];
+        let cart;
+        if(localStorage.getItem('cart')){
+            cart = JSON.parse(localStorage.getItem('cart'));
+        } else {
+            cart = [];
+        }
+        return cart;
     }
 
     // Get Totals from storage
@@ -68,7 +74,7 @@ class ProductProvider extends Component {
             cartItems += item.count;
         });
         subTotal = parseFloat(subTotal.toFixed(2));
-        let tax = subTotal *0.2;
+        let tax = subTotal * 0.2;
         tax = parseFloat(tax.toFixed(2));
         let total = subTotal + tax;
         total = parseFloat(total.toFixed(2));
@@ -93,18 +99,18 @@ class ProductProvider extends Component {
 
     // Sync Storage
     syncStorage =() => {
-        
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
     }
 
     // Add to cart
-    addToCart = (id) => {
+    addToCart = id => {
         let tempCart = [...this.state.cart];
         let tempProducts = [...this.state.storeProducts];
         let tempItem = tempCart.find(item => item.id === id);
         if(!tempItem){
             tempItem = tempProducts.find(item => item.id === id);
             let total = tempItem.price;
-            let cartItem = {...tempCart, count:1, total};
+            let cartItem = {...tempItem, count:1, total};
             tempCart = [...tempCart,cartItem];
         } else {
             tempItem.count++;
