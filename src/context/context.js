@@ -14,7 +14,7 @@ class ProductProvider extends Component {
         links: linkData,
         socialIcons: socialData,
         cart:[],
-        cartItems:66,
+        cartItems:0,
         cartSubTotal:0,
         cartTax:0,
         cartTotal:0,
@@ -51,7 +51,9 @@ class ProductProvider extends Component {
 
     // Get Product from storage
     getStorageProduct = () => {
-        return [];
+        return localStorage.getItem('singleProduct') ? 
+            JSON.parse(localStorage.getItem('singleProduct')) : 
+            {};
     }
 
     // Get Cart from storage
@@ -129,7 +131,12 @@ class ProductProvider extends Component {
 
     // Set Single Product
     setSingleProduct = (id) => {
-        console.log(`Set Single Product ${id}`);
+        let product = this.state.storeProducts.find(item => item.id === id);
+        localStorage.setItem('singleProduct', JSON.stringify(product));
+        this.setState({
+            singleProduct: {...product},
+            loading: false
+        });
     }
 
     // Handle Sidebar
