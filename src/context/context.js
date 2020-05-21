@@ -10,7 +10,7 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
     state = { 
         sidebarOpen:false,
-        cartOpen:true,
+        cartOpen:false,
         links: linkData,
         socialIcons: socialData,
         cart:[],
@@ -159,6 +159,27 @@ class ProductProvider extends Component {
         this.setState({cartOpen: true}) 
     }
 
+    // cart funcionality
+    // increment
+    increment = (id) => {
+        console.log(id);
+    }
+
+     // decrement
+     decrement = (id) => {
+        console.log(id);
+    }
+
+    // Remove Item
+    removeItem = (id) => {
+        console.log(id);
+    }
+    
+    // Clear Cart
+    clearCart = () => {
+        console.log("Just cleared the  cart");
+    }
+
     render() {
         return(
             <ProductContext.Provider 
@@ -169,7 +190,11 @@ class ProductProvider extends Component {
                     closeCart: this.closeCart, 
                     openCart: this.openCart,
                     addToCart: this.addToCart,
-                    setSingleProduct: this.setSingleProduct
+                    setSingleProduct: this.setSingleProduct,
+                    increment: this.increment,
+                    decrement: this.decrement,
+                    removeItem: this.removeItem,
+                    clearCart: this.clearCart
                     }}
             >
                 {this.props.children}
