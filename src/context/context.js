@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { linkData } from './linkData';
 import { socialData } from './socialData';
-import { items } from './productData';
-import { FaLessThanEqual } from 'react-icons/fa';
+//import { items } from './productData';
+import Client from './contentful';
 
 const ProductContext = React.createContext();
 //Provider
@@ -10,7 +10,7 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
     state = { 
         sidebarOpen:false,
-        cartOpen:false,
+        cartOpen:false, 
         links: linkData,
         socialIcons: socialData,
         cart:[],
@@ -31,9 +31,22 @@ class ProductProvider extends Component {
         shipping:false
     }
 
+    //get Data
+    getData = async () => {
+        try {
+            let response = await Client.getEntries({
+                content_type: "techStoreProducts"
+            }).then(response => this.setProducts(response.items));
+        } catch(error) { 
+            console.log(error);
+        }
+    };
+
     componentDidMount(){
+        //this.setProducts(items);
+
         //from contentful items
-        this.setProducts(items);
+        this.getData();
     }
 
     setProducts = (products) => {
@@ -48,7 +61,6 @@ class ProductProvider extends Component {
         
         // get max price
         let maxPrice = Math.max(...storeProducts.map(item => item.price));
-         
 
         this.setState({
             storeProducts,
