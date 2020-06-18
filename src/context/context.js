@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { linkData } from './linkData';
 import { socialData } from './socialData';
 //import { items } from './productData';
-import Client from './contentful';
+import {client} from './contentful';
 
 const ProductContext = React.createContext();
 //Provider
@@ -34,7 +34,7 @@ class ProductProvider extends Component {
     //get Data
     getData = async () => {
         
-        await Client.getEntries({
+        await client.getEntries({
                         content_type: "techStoreProducts"
                      })
                     .then(response => this.setProducts(response.items))
@@ -54,7 +54,14 @@ class ProductProvider extends Component {
         //this.setProducts(items);
 
         //from contentful items
-        this.getData();
+        //this.getData();
+        client.getEntries({
+            content_type: "techStoreProducts"
+         })
+        .then(response => this.setProducts(response.items))
+        .catch(console.error);
+
+
     }
 
     setProducts = (products) => {
