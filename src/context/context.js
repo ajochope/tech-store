@@ -33,6 +33,13 @@ class ProductProvider extends Component {
 
     //get Data
     getData = async () => {
+        
+        await Client.getEntries({
+                        content_type: "techStoreProducts"
+                     })
+                    .then(response => this.setProducts(response.items))
+                    .catch(console.error);
+        /*
         try {
             let response = await Client.getEntries({
                 content_type: "techStoreProducts"
@@ -40,6 +47,7 @@ class ProductProvider extends Component {
         } catch(error) { 
             console.log(error);
         }
+        */
     };
 
     componentDidMount(){
